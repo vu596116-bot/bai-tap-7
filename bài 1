@@ -1,1 +1,52 @@
+import React, { useState } from "react";
 
+// Component Display hiển thị kết quả
+const Display = ({ value }) => (
+  <div style={{ padding: "20px", background: "#ddd", textAlign: "right", minHeight: "24px" }}>
+    {value || "0"}
+  </div>
+);
+
+// Component Button nhận props nhãn, màu
+const Button = ({ label, color, onClick }) => (
+  <button style={{ padding: "20px", background: color }} onClick={() => onClick(label)}>
+    {label}
+  </button>
+);
+
+export default function VirtualCalculator() {
+  // State lưu biểu thức hiện tại
+  const [expr, setExpr] = useState("");
+
+  // Xử lý logic +, -, *, /, Clear, Delete, =
+  const handleClick = (label) => {
+    if (label === "Clear") setExpr("");
+    else if (label === "Delete") setExpr(expr.slice(0, -1));
+    else if (label === "=") setExpr(eval(expr).toString()); // Dùng eval để tính toán ngắn gọn nhất
+    else setExpr(expr + label);
+  };
+
+  const buttons = [
+    "Clear", "Delete", ".", "/",
+    "7", "8", "9", "*",
+    "4", "5", "6", "-",
+    "1", "2", "3", "+",
+    "0", "="
+  ];
+
+  return (
+    <div style={{ width: "250px", border: "1px solid #000" }}>
+      <Display value={expr} />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
+        {buttons.map((btn) => (
+          <Button 
+            key={btn} 
+            label={btn} 
+            color="#4CAF50" // Màu xanh theo giao diện tham khảo
+            onClick={handleClick} 
+          />
+        ))}
+      </div>
+    </div>
+  );
+}

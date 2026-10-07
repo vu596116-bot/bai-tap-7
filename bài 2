@@ -1,1 +1,42 @@
+import React from "react";
 
+const Section = ({ title, children }) => (
+  <section style={{ marginBottom: 20 }}>
+    <h2>{title}</h2>
+    {children}
+  </section>
+);
+
+const Header = ({ name, title }) => (
+  <header>
+    <h1>{name}</h1>
+    <p>{title}</p>
+  </header>
+);
+
+const List = ({ items }) => (
+  <ul>
+    {items.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
+  </ul>
+);
+
+const skillsData = ["ReactJS", "JavaScript", "HTML/CSS", "Git"];
+const projectsData = ["Website Bán Hàng", "Ứng dụng Thời Tiết", "Trang CV Personal"];
+
+export default function App() {
+  return (
+    <div style={{ padding: 20, fontFamily: "sans-serif" }}>
+      <Header name="Nguyễn Văn A" title="Frontend Developer" />
+
+      <Section title="Kỹ năng">
+        <List items={skillsData} />
+      </Section>
+
+      <Section title="Dự án">
+        <List items={projectsData} />
+      </Section>
+    </div>
+  );
+}

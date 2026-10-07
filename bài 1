@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
-// Component Display hiển thị kết quả
 const Display = ({ value }) => (
   <div style={{ padding: "20px", background: "#ddd", textAlign: "right", minHeight: "24px" }}>
     {value || "0"}
   </div>
 );
 
-// Component Button nhận props nhãn, màu
 const Button = ({ label, color, onClick }) => (
   <button style={{ padding: "20px", background: color }} onClick={() => onClick(label)}>
     {label}
@@ -18,7 +16,6 @@ export default function VirtualCalculator() {
   // State lưu biểu thức hiện tại
   const [expr, setExpr] = useState("");
 
-  // Xử lý logic +, -, *, /, Clear, Delete, =
   const handleClick = (label) => {
     if (label === "Clear") setExpr("");
     else if (label === "Delete") setExpr(expr.slice(0, -1));
